@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:create] do
-    collection do
-      get :top_rated
-    end
-    member do
-      post :rate
-    end
+  resources :ratings
+  resources :posts, only: :create do
+    get :top_rated, on: :collection
+    post :rate, on: :member
   end
 end

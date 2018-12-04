@@ -1,14 +1,18 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:rate]
+  before_action :set_post, only: :rate
 
   def top_rated
-    # @posts = Post.all
+    @posts = Post.all
+    # if @posts.empty?
 
-    # render json: @posts
+    render json: @posts
   end
 
   def create
-    # @post = Post.new(post_params)
+    binding.pry
+    # puts 1
+    @post = PostForm.new
+    # (permitted_params)
 
     # if @post.save
     #   render json: @post, status: :created, location: @post
@@ -18,20 +22,27 @@ class PostsController < ApplicationController
   end
 
   def rate
-    # if @post.update(post_params)
-    #   render json: @post
-    # else
-    #   render json: @post.errors, status: :unprocessable_entity
-    # end
+    if @post.rate(permitted_params[:rating])
+      render json: @post
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
+  def permitted_params
+    params.permit(
+      :id,
+      :rating,
+      :title,
+      :content,
+      :user_ip,
+      :user_login
+    )
   end
 
-  def post_params
-    params.require(:post).permit(:title, :content, :user_ip, :user_login)
+  def set_post
+    @post = Post.find(permitted_params[:id])
   end
 end

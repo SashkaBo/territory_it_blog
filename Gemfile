@@ -12,16 +12,17 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'active_model_serializers'
 
+gem 'awesome_print'
+gem 'pry-rails'
+gem 'pry-byebug'
+
 group :development, :test do
   gem 'rspec-rails'
-  gem 'awesome_print'
-  gem 'pry-byebug'
-  gem 'pry-rails'
 end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'spring'
+  # gem 'spring-watcher-listen', '~> 2.0.0'
 end

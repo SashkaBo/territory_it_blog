@@ -30,5 +30,12 @@ module TerritoryItBlog
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Custom directories with classes and modules you want to be autoloadable.
+    custom_load_paths = %w[
+      app/form_objects
+    ].map { |path| config.root.join(path).to_s }
+    config.autoload_paths += custom_load_paths
+    config.eager_load_paths += custom_load_paths
   end
 end
